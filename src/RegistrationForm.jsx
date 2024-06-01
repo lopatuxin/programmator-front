@@ -1,23 +1,34 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {useForm, Controller} from 'react-hook-form';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import './RegistrationForm.css';
 
 const RegistrationForm = () => {
-    const { control, handleSubmit } = useForm();
+    const {control, handleSubmit} = useForm();
 
-    const onSubmit = (data) => {
-        fetch('http://localhost:8080/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
+    const onSubmit = async (data) => {
+        try {
+            const response = await fetch('http://localhost:8080/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const responseData = await response.json();
+            console.log('Success:', responseData);
+            alert(responseData); // Вывод сообщения на экран
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Registration failed: ' + error.message); // Вывод сообщения об ошибке
+        }
     };
+
 
     return (
         <div className="registration-container">
@@ -25,46 +36,46 @@ const RegistrationForm = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="input-group">
                         <label htmlFor="username">
-                            <FontAwesomeIcon icon="user" />
+                            <FontAwesomeIcon icon="user"/>
                         </label>
                         <Controller
                             name="username"
                             control={control}
                             defaultValue=""
-                            render={({ field }) => <input {...field} placeholder="Ваше имя" />}
+                            render={({field}) => <input {...field} placeholder="Ваше имя"/>}
                         />
                     </div>
                     <div className="input-group">
                         <label htmlFor="email">
-                            <FontAwesomeIcon icon="envelope" />
+                            <FontAwesomeIcon icon="envelope"/>
                         </label>
                         <Controller
                             name="email"
                             control={control}
                             defaultValue=""
-                            render={({ field }) => <input {...field} placeholder="Ваша почта" />}
+                            render={({field}) => <input {...field} placeholder="Ваша почта"/>}
                         />
                     </div>
                     <div className="input-group">
                         <label htmlFor="password">
-                            <FontAwesomeIcon icon="lock" />
+                            <FontAwesomeIcon icon="lock"/>
                         </label>
                         <Controller
                             name="password"
                             control={control}
                             defaultValue=""
-                            render={({ field }) => <input {...field} type="password" placeholder="Пароль" />}
+                            render={({field}) => <input {...field} type="password" placeholder="Пароль"/>}
                         />
                     </div>
                     <div className="input-group">
                         <label htmlFor="confirmPassword">
-                            <FontAwesomeIcon icon="lock" />
+                            <FontAwesomeIcon icon="lock"/>
                         </label>
                         <Controller
                             name="confirmPassword"
                             control={control}
                             defaultValue=""
-                            render={({ field }) => <input {...field} type="password" placeholder="Подтвердите пароль" />}
+                            render={({field}) => <input {...field} type="password" placeholder="Подтвердите пароль"/>}
                         />
                     </div>
                     <button type="submit">Зарегистрироваться</button>
