@@ -1,38 +1,75 @@
 import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './RegistrationForm.css';
 
 const RegistrationForm = () => {
+    const { control, handleSubmit } = useForm();
+
+    const onSubmit = (data) => {
+        fetch('http://localhost:8080/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    };
+
     return (
         <div className="registration-container">
             <div className="registration-box">
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="input-group">
                         <label htmlFor="username">
-                            <i className="fas fa-user"></i>
+                            <FontAwesomeIcon icon="user" />
                         </label>
-                        <input type="text" id="username" name="username" placeholder="Ваше имя" required />
+                        <Controller
+                            name="username"
+                            control={control}
+                            defaultValue=""
+                            render={({ field }) => <input {...field} placeholder="Ваше имя" />}
+                        />
                     </div>
                     <div className="input-group">
                         <label htmlFor="email">
-                            <i className="fas fa-envelope"></i>
+                            <FontAwesomeIcon icon="envelope" />
                         </label>
-                        <input type="email" id="email" name="email" placeholder="Почта" required />
+                        <Controller
+                            name="email"
+                            control={control}
+                            defaultValue=""
+                            render={({ field }) => <input {...field} placeholder="Ваша почта" />}
+                        />
                     </div>
                     <div className="input-group">
                         <label htmlFor="password">
-                            <i className="fas fa-lock"></i>
+                            <FontAwesomeIcon icon="lock" />
                         </label>
-                        <input type="password" id="password" name="password" placeholder="Пароль" required />
+                        <Controller
+                            name="password"
+                            control={control}
+                            defaultValue=""
+                            render={({ field }) => <input {...field} type="password" placeholder="Пароль" />}
+                        />
                     </div>
                     <div className="input-group">
-                        <label htmlFor="confirm-password">
-                            <i className="fas fa-lock"></i>
+                        <label htmlFor="confirmPassword">
+                            <FontAwesomeIcon icon="lock" />
                         </label>
-                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Подтвердите пароль" required />
+                        <Controller
+                            name="confirmPassword"
+                            control={control}
+                            defaultValue=""
+                            render={({ field }) => <input {...field} type="password" placeholder="Подтвердите пароль" />}
+                        />
                     </div>
-                    <button type="submit">Регистрация</button>
+                    <button type="submit">Зарегистрироваться</button>
                 </form>
-                <p>Уже зарегистрированы? <a href="#">Вход</a></p>
+                <p>Уже есть аккаунт? <a href="#">Вход</a></p>
             </div>
         </div>
     );
