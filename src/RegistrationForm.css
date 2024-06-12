@@ -3,9 +3,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to bottom, #141e30, #243b55);
+    background: linear-gradient(135deg, #1e1e2f, #1a2a3a);
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
 }
 
 .registration-container {
@@ -18,15 +19,37 @@ body {
 }
 
 .registration-box {
-    background: rgba(0, 0, 0, 0.6);
-    border: 2px solid #00FF00;
+    background: #2b2b3c;
     border-radius: 15px;
-    box-shadow: 0 4px 30px rgba(0, 255, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     padding: 20px;
     width: 100%;
     max-width: 400px;
     text-align: center;
-    color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.registration-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: rotation 10s infinite linear;
+    z-index: -1;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 form {
@@ -40,15 +63,15 @@ form {
     align-items: center;
     margin-bottom: 15px;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
-    border: 1px solid #00FF00;
     width: 100%;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.8);
 }
 
 .input-group label {
     margin-right: 10px;
-    color: #00FF00;
+    color: #00d9ff;
 }
 
 .input-group input {
@@ -58,24 +81,35 @@ form {
     color: white;
     width: 100%;
     padding: 5px;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
+    z-index: 1;
 }
 
 button {
     width: 100%;
     padding: 10px;
     border: none;
-    border-radius: 5px;
-    background: #00FF00;
-    color: #333;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #00d9ff, #00ff6e);
+    color: white;
     cursor: pointer;
     font-size: 1em;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
+    z-index: 1;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #00ff6e, #00d9ff);
+    transform: translateY(-3px);
 }
 
 .registration-box p {
-    color: #00FF00;
+    color: #00d9ff;
 }
 
 .registration-box a {
-    color: #00FF00;
+    color: #00d9ff;
     text-decoration: none;
 }
