@@ -2,6 +2,7 @@ import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import './RegistrationForm.css';
+import {Link} from "react-router-dom";
 
 const RegistrationForm = () => {
     const {control, handleSubmit} = useForm();
@@ -80,7 +81,7 @@ const RegistrationForm = () => {
                     </div>
                     <button type="submit">Зарегистрироваться</button>
                 </form>
-                <p>Уже есть аккаунт? <a href="#">Вход</a></p>
+                <p>Уже есть аккаунт? <Link to="/login">Вход</Link></p>
             </div>
         </div>
     );
