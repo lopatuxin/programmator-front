@@ -2,10 +2,11 @@ import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import './RegistrationForm.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const RegistrationForm = () => {
     const {control, handleSubmit} = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
@@ -24,6 +25,7 @@ const RegistrationForm = () => {
             const responseData = await response.json();
             console.log('Success:', responseData);
             alert(responseData); // Вывод сообщения на экран
+            navigate('/dashboard');
         } catch (error) {
             console.error('Error:', error);
             alert('Registration failed: ' + error.message); // Вывод сообщения об ошибке
