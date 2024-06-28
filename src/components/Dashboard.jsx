@@ -1,109 +1,89 @@
-import React from 'react';
-import { Box, CssBaseline, Drawer, AppBar, Toolbar, List, Typography, Divider, ListItem, ListItemIcon, ListItemText, Grid, Card, CardContent } from '@mui/material';
-import { Home, AccountCircle, Settings, Mail, BarChart } from '@mui/icons-material';
+import React, {useState} from 'react';
+import './Dashboard.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCalendarAlt, faChartBar, faCog, faStore, faTachometerAlt, faTasks} from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from "react-router-dom";
 
-const drawerWidth = 240;
+const CustomDashboard = () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false); // Простое состояние авторизации
+    const navigate = useNavigate();
 
-const Dashboard = () => {
+    const handleLogin = () => {
+        navigate('/login');
+    };
+
+    const handleRegister = () => {
+        navigate('/register');
+    };
+
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, bgcolor: 'background.paper', color: 'text.primary' }}>
-                <Toolbar>
-                    <Typography variant="h6" noWrap component="div">
-                        Dashboard
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                        bgcolor: 'background.default',
-                        color: 'text.primary'
-                    },
-                }}
-                variant="permanent"
-                anchor="left"
-            >
-                <Toolbar />
-                <Divider />
-                <List>
-                    {['Домой', 'Профиль', 'Настройки', 'Сообщения', 'Аналитика'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index === 0 ? <Home /> :
-                                    index === 1 ? <AccountCircle /> :
-                                        index === 2 ? <Settings /> :
-                                            index === 3 ? <Mail /> :
-                                                <BarChart />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
-            <Box
-                component="main"
-                sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-            >
-                <Toolbar />
-                <Grid container spacing={3}>
-                    <Grid item xs={12} md={6}>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h5">Chart 1</Typography>
-                                <Typography>Chart goes here...</Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h5">Chart 2</Typography>
-                                <Typography>Chart goes here...</Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12} md={3}>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h6">Widget 1</Typography>
-                                <Typography>Content goes here...</Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12} md={3}>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h6">Widget 2</Typography>
-                                <Typography>Content goes here...</Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12} md={3}>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h6">Widget 3</Typography>
-                                <Typography>Content goes here...</Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12} md={3}>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h6">Widget 4</Typography>
-                                <Typography>Content goes here...</Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                </Grid>
-            </Box>
-        </Box>
-    );
+        <div className="custom-dashboard">
+            <div className="sidebar">
+                {isAuthenticated ? (
+                    <div className="profile">
+                        <img src="profile-image-url" alt="Profile" className="profile-img" />
+                        <h2>James Gibson</h2>
+                        <p>Front-end Developer</p>
+                        <button>Follow</button>
+                        <button>Message</button>
+                    </div>
+                ) : (
+                    <div className="auth-buttons">
+                        <button onClick={handleLogin} className="auth-button">Войти</button>
+                        <button onClick={handleRegister} className="auth-button">Регистрация</button>
+                    </div>
+                )}
+                <ul>
+                    <li><FontAwesomeIcon icon={faTachometerAlt} /> Dashboard</li>
+                    <li><FontAwesomeIcon icon={faTasks} /> Management</li>
+                    <li><FontAwesomeIcon icon={faCog} /> Services</li>
+                    <li><FontAwesomeIcon icon={faStore} /> Store</li>
+                    <li><FontAwesomeIcon icon={faCalendarAlt} /> Schedule</li>
+                    <li><FontAwesomeIcon icon={faChartBar} /> Statistics</li>
+                </ul>
+            </div>
+    <div className="dashboard">
+        <div className="dashboard-header">
+            <h1>Dashboard</h1>
+            <p>Daily - May 15th, 2015</p>
+        </div>
+        <div className="stats-overview">
+            <div className="stat">
+                <h3>340,108</h3>
+                <p>Unique Views</p>
+            </div>
+            <div className="stat">
+                <h3>25%</h3>
+                <p>Visit and Stay</p>
+            </div>
+            <div className="stat">
+                <h3>50%</h3>
+                <p>Visit from Social</p>
+            </div>
+            <div className="stat">
+                <h3>75%</h3>
+                <p>Shares</p>
+            </div>
+        </div>
+        <div className="charts">
+            <div className="chart">Hourly Views</div>
+            <div className="chart">Browsers</div>
+        </div>
+        <div className="info-grids">
+            <div className="grid-item">Visitor Breakdown</div>
+            <div className="grid-item">Download Reports</div>
+            <div className="grid-item">Members</div>
+            <div className="grid-item">Messages</div>
+            <div className="grid-item">Alerts</div>
+            <div className="grid-item">Media</div>
+            <div className="grid-item">Switches</div>
+            <div className="grid-item">Buttons</div>
+            <div className="grid-item">Controls</div>
+        </div>
+    </div>
+</div>
+)
+    ;
 };
 
-export default Dashboard;
+export default CustomDashboard;
