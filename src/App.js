@@ -33,7 +33,7 @@ function App() {
                     <Route path="/register" element={<RegistrationForm />} />
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="*" element={<RegistrationForm />} />
+                    <Route path="*" element={<Dashboard />} />
                 </Routes>
             </Router>
         </ThemeProvider>
