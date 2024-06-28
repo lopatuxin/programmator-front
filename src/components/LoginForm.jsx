@@ -58,7 +58,7 @@ const LoginForm = () => {
                             render={({field}) => <input {...field} type="password" placeholder="Пароль"/>}
                         />
                     </div>
-                    <button type="submit">Войти</button>
+                    <button type="submit" className="login-button">Войти</button>
                 </form>
                 <p>Нет аккаунта? <Link to="/register">Регистрация</Link></p>
             </div>

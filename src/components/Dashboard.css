@@ -6,13 +6,13 @@
 }
 
 .sidebar {
-    width: 240px;
+    width: 200px;
     background-color: #1e1e2f;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
 }
 
 .auth-buttons {
@@ -25,17 +25,18 @@
 .auth-button {
     margin: 5px;
     padding: 10px;
-    background-color: #00d9ff;
+    background-color: #6761a8;
     border: none;
     color: white;
     cursor: pointer;
     border-radius: 5px;
     width: 100%;
     text-align: center;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 
 .auth-button:hover {
-    background-color: #00b2e2;
+    background-color: #1761a8;
 }
 
 .profile {

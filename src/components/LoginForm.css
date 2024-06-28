@@ -86,7 +86,7 @@ form {
     z-index: 1;
 }
 
-button {
+button.login-button {
     width: 100%;
     padding: 10px;
     border: none;
@@ -100,7 +100,7 @@ button {
     z-index: 1;
 }
 
-button:hover {
+button.login-button:hover {
     background: linear-gradient(45deg, #00ff6e, #00d9ff);
     transform: translateY(-3px);
 }

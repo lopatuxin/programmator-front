@@ -81,7 +81,7 @@ const RegistrationForm = () => {
                             render={({field}) => <input {...field} type="password" placeholder="Подтвердите пароль"/>}
                         />
                     </div>
-                    <button type="submit">Зарегистрироваться</button>
+                    <button type="submit" className="registration-button">Зарегистрироваться</button>
                 </form>
                 <p>Уже есть аккаунт? <Link to="/login">Вход</Link></p>
             </div>
