@@ -1,12 +1,13 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faVk, faYandex } from '@fortawesome/free-brands-svg-icons';
+import {Controller, useForm} from 'react-hook-form';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faGoogle, faVk, faYandex} from '@fortawesome/free-brands-svg-icons';
 import './LoginForm.css';
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 
 const LoginForm = () => {
-    const { control, handleSubmit, setError } = useForm();
+    const {control, handleSubmit} = useForm();
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = React.useState('');
 
@@ -22,7 +23,8 @@ const LoginForm = () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'Network response was not ok');
+                setErrorMessage('Ошибка входа: ' + (errorData.message || 'Ответ сети был неудачным'));
+                return;
             }
 
             const responseData = await response.json();
@@ -43,25 +45,21 @@ const LoginForm = () => {
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="input-group">
-                        <label htmlFor="email">
-                            <FontAwesomeIcon icon="envelope" />
-                        </label>
+                        <FontAwesomeIcon icon={faEnvelope} className="input-icon"/>
                         <Controller
                             name="email"
                             control={control}
                             defaultValue=""
-                            render={({ field }) => <input {...field} placeholder="Ваша почта" />}
+                            render={({field}) => <input {...field} placeholder="Ваша почта"/>}
                         />
                     </div>
                     <div className="input-group">
-                        <label htmlFor="password">
-                            <FontAwesomeIcon icon="lock" />
-                        </label>
+                        <FontAwesomeIcon icon={faLock} className="input-icon"/>
                         <Controller
                             name="password"
                             control={control}
                             defaultValue=""
-                            render={({ field }) => <input {...field} type="password" placeholder="Пароль" />}
+                            render={({field}) => <input {...field} type="password" placeholder="Пароль"/>}
                         />
                     </div>
                     <button type="submit">Войти</button>
@@ -70,9 +68,9 @@ const LoginForm = () => {
                 <p><Link to="/forgot-password" className="forgot-password-link">Забыли пароль?</Link></p>
                 <p>Или войдите через социальные сети:</p>
                 <div className="social-login">
-                    <FontAwesomeIcon icon={faGoogle} className="social-icon google" />
-                    <FontAwesomeIcon icon={faYandex} className="social-icon yandex" />
-                    <FontAwesomeIcon icon={faVk} className="social-icon vk" />
+                    <FontAwesomeIcon icon={faGoogle} className="social-icon google"/>
+                    <FontAwesomeIcon icon={faYandex} className="social-icon yandex"/>
+                    <FontAwesomeIcon icon={faVk} className="social-icon vk"/>
                 </div>
                 <p>Нет аккаунта? <Link to="/register" className="register-link">Регистрация</Link></p>
             </div>
