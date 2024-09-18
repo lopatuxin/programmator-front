@@ -3,6 +3,7 @@ import {useForm, Controller} from 'react-hook-form';
 import './RegistrationForm.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUser, faEnvelope, faPhone, faLock} from '@fortawesome/free-solid-svg-icons';
+import {Link} from "react-router-dom";
 
 const RegistrationForm = () => {
     const {control, handleSubmit, formState: {errors}, getValues} = useForm();
@@ -150,6 +151,7 @@ const RegistrationForm = () => {
                         />
                         {errors.terms2 && <span className="error-message">{errors.terms2.message}</span>}
                     </div>
+                    <p>Уже есть аккаунт? <Link to="/login" className="login-link">Вход</Link></p>
                     <button type="submit">Зарегистрироваться</button>
                 </form>
             </div>
