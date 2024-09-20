@@ -45,22 +45,26 @@ const LoginForm = () => {
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="input-group">
-                        <FontAwesomeIcon icon={faEnvelope} className="input-icon"/>
-                        <Controller
-                            name="email"
-                            control={control}
-                            defaultValue=""
-                            render={({field}) => <input {...field} placeholder="Ваша почта"/>}
-                        />
+                        <div className="input-with-icon">
+                            <FontAwesomeIcon icon={faEnvelope} className="input-icon"/>
+                            <Controller
+                                name="email"
+                                control={control}
+                                defaultValue=""
+                                render={({field}) => <input {...field} placeholder="Ваша почта"/>}
+                            />
+                        </div>
                     </div>
                     <div className="input-group">
-                        <FontAwesomeIcon icon={faLock} className="input-icon"/>
-                        <Controller
-                            name="password"
-                            control={control}
-                            defaultValue=""
-                            render={({field}) => <input {...field} type="password" placeholder="Пароль"/>}
-                        />
+                        <div className="input-with-icon">
+                            <FontAwesomeIcon icon={faLock} className="input-icon"/>
+                            <Controller
+                                name="password"
+                                control={control}
+                                defaultValue=""
+                                render={({field}) => <input {...field} type="password" placeholder="Пароль"/>}
+                            />
+                        </div>
                     </div>
                     <button type="submit">Войти</button>
                 </form>
