@@ -1,9 +1,9 @@
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import './RegistrationForm.css';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEnvelope, faLock, faPhone, faUser} from '@fortawesome/free-solid-svg-icons';
 import {Link} from "react-router-dom";
+import InputField from "./input/InputField";
 
 const RegistrationForm = () => {
     const {control, handleSubmit, formState: {errors}, getValues} = useForm();
@@ -44,98 +44,68 @@ const RegistrationForm = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {submitError && <div className="submit-error">{submitError}</div>}
                     {submitSuccess && <div className="submit-success">{submitSuccess}</div>}
-                    <div className="input-group">
-                        <div className="input-with-icon">
-                            <FontAwesomeIcon icon={faUser} className="input-icon"/>
-                            <Controller
-                                name="firstName"
-                                control={control}
-                                defaultValue=""
-                                rules={{required: "Имя обязательно"}}
-                                render={({field}) => <input {...field} placeholder="Имя"/>}
-                            />
-                        </div>
-                    </div>
-                    {errors.firstName && <span className="error-message">{errors.firstName.message}</span>}
-                    <div className="input-group">
-                        <div className="input-with-icon">
-                            <FontAwesomeIcon icon={faUser} className="input-icon"/>
-                            <Controller
-                                name="lastName"
-                                control={control}
-                                defaultValue=""
-                                rules={{required: {value: true, message: "Фамилия обязательна"}}}
-                                render={({field}) => <input {...field} placeholder="Фамилия"/>}
-                            />
-                        </div>
-                    </div>
-                    {errors.lastName && <span className="error-message">{errors.lastName.message}</span>}
-                    <div className="input-group">
-                        <div className="input-with-icon">
-                            <FontAwesomeIcon icon={faEnvelope} className="input-icon"/>
-                            <Controller
-                                name="email"
-                                control={control}
-                                defaultValue=""
-                                rules={{
-                                    required: {value: true, message: "Электронная почта обязательна"},
-                                    pattern: {value: /^\S+@\S+$/i, message: "Неверный формат электронной почты"}
-                                }}
-                                render={({field}) => <input {...field} placeholder="Электронная почта"/>}
-                            />
-                        </div>
-                    </div>
-                    {errors.email && <span className="error-message">{errors.email.message}</span>}
-                    <div className="input-group">
-                        <div className="input-with-icon">
-                            <FontAwesomeIcon icon={faPhone} className="input-icon"/>
-                            <Controller
-                                name="phone"
-                                control={control}
-                                defaultValue=""
-                                rules={{
-                                    required: {value: true, message: "Номер телефона обязателен"},
-                                    pattern: {value: /^[0-9]{10,}$/, message: "Неверный формат номера телефона"}
-                                }}
-                                render={({field}) => <input {...field} placeholder="Номер телефона"/>}
-                            />
-                        </div>
-                    </div>
-                    {errors.phone && <span className="error-message">{errors.phone.message}</span>}
-                    <div className="input-group">
-                        <div className="input-with-icon">
-                            <FontAwesomeIcon icon={faLock} className="input-icon"/>
-                            <Controller
-                                name="password"
-                                control={control}
-                                defaultValue=""
-                                rules={{
-                                    required: {value: true, message: "Пароль обязателен"},
-                                    minLength: {value: 8, message: "Пароль должен быть не менее 8 символов"}
-                                }}
-                                render={({field}) => <input {...field} type="password" placeholder="Пароль"/>}
-                            />
-                        </div>
-                    </div>
-                    {errors.password && <span className="error-message">{errors.password.message}</span>}
-                    <div className="input-group">
-                        <div className="input-with-icon">
-                            <FontAwesomeIcon icon={faLock} className="input-icon"/>
-                            <Controller
-                                name="confirmPassword"
-                                control={control}
-                                defaultValue=""
-                                rules={{
-                                    required: {value: true, message: "Подтверждение пароля обязательно"},
-                                    validate: value => value === getValues('password') || "Пароли не совпадают"
-                                }}
-                                render={({field}) => <input {...field} type="password"
-                                                            placeholder="Подтвердите пароль"/>}
-                            />
-                        </div>
-                    </div>
-                    {errors.confirmPassword &&
-                        <span className="error-message">{errors.confirmPassword.message}</span>}
+                    <InputField
+                        name="firstName"
+                        placeholder="Имя"
+                        icon={faUser}
+                        control={control}
+                        rules={{required: "Имя обязательно"}}
+                        errors={errors}
+                    />
+                    <InputField
+                        name="lastName"
+                        placeholder="Фамилия"
+                        icon={faUser}
+                        control={control}
+                        rules={{required: "Фамилия обязательна"}}
+                        errors={errors}
+                    />
+                    <InputField
+                        name="email"
+                        placeholder="Электронная почта"
+                        icon={faEnvelope}
+                        control={control}
+                        rules={{
+                            required: "Электронная почта обязательна",
+                            pattern: {value: /^\S+@\S+$/i, message: "Неверный формат электронной почты"}
+                        }}
+                        errors={errors}
+                    />
+                    <InputField
+                        name="phone"
+                        placeholder="Номер телефона"
+                        icon={faPhone}
+                        control={control}
+                        rules={{
+                            required: "Номер телефона обязателен",
+                            pattern: {value: /^[0-9]{10}$/, message: "Неверный формат номера телефона"}
+                        }}
+                        errors={errors}
+                    />
+                    <InputField
+                        name="password"
+                        placeholder="Пароль"
+                        icon={faLock}
+                        type="password"
+                        control={control}
+                        rules={{
+                            required: "Пароль обязателен",
+                            minLength: {value: 8, message: "Пароль должен быть не менее 8 символов"}
+                        }}
+                        errors={errors}
+                    />
+                    <InputField
+                        name="confirmPassword"
+                        placeholder="Подтвердите пароль"
+                        icon={faLock}
+                        type="password"
+                        control={control}
+                        rules={{
+                            required: "Подтверждение пароля обязательно",
+                            validate: value => value === getValues('password') || "Пароли не совпадают"
+                        }}
+                        errors={errors}
+                    />
                     <div className="checkbox-group">
                         <Controller
                             name="subscribeToNewsletter"

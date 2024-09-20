@@ -43,38 +43,6 @@ body {
     color: #fff;
 }
 
-.input-group {
-    margin-bottom: 5px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.input-with-icon {
-    display: flex;
-    align-items: center;
-}
-
-.input-icon {
-    margin-right: 10px;
-    color: #fff; /* Если нужно изменить цвет иконки */
-}
-
-.input-with-icon input {
-    flex: 1;
-    width: 100%;
-    padding: 15px;
-    margin-top: 5px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    background-color: #fff;
-    color: #000;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-
 .checkbox-group {
     display: flex;
     flex-direction: column;
@@ -113,16 +81,8 @@ button:hover {
     background: #218838;
 }
 
-.error-message {
-    color: #ff6b6b;
-    font-size: 14px;
-    margin-top: 5px;
-    display: block;
-    margin-bottom: 15px;
-}
-
 .login-link {
-    color: #ffcc00; /* Цвет ссылки */
+    color: #ffcc00;
     text-decoration: none;
 }
 

@@ -1,0 +1,46 @@
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.input-with-icon {
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    outline: none;
+    background-color: transparent;
+    color: #000;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+.input-icon {
+    padding: 0 15px;
+    color: #000;
+    font-size: 20px;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+    margin-bottom: 15px;
+}

@@ -1,13 +1,14 @@
 import React from 'react';
-import {Controller, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faGoogle, faVk, faYandex} from '@fortawesome/free-brands-svg-icons';
 import './LoginForm.css';
 import {Link, useNavigate} from "react-router-dom";
 import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
+import InputField from "./input/InputField";
 
 const LoginForm = () => {
-    const {control, handleSubmit} = useForm();
+    const { control, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = React.useState('');
 
@@ -44,28 +45,27 @@ const LoginForm = () => {
                     <h2>Вход в систему</h2>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="input-group">
-                        <div className="input-with-icon">
-                            <FontAwesomeIcon icon={faEnvelope} className="input-icon"/>
-                            <Controller
-                                name="email"
-                                control={control}
-                                defaultValue=""
-                                render={({field}) => <input {...field} placeholder="Ваша почта"/>}
-                            />
-                        </div>
-                    </div>
-                    <div className="input-group">
-                        <div className="input-with-icon">
-                            <FontAwesomeIcon icon={faLock} className="input-icon"/>
-                            <Controller
-                                name="password"
-                                control={control}
-                                defaultValue=""
-                                render={({field}) => <input {...field} type="password" placeholder="Пароль"/>}
-                            />
-                        </div>
-                    </div>
+                    <InputField
+                        name="email"
+                        placeholder="Ваша почта"
+                        icon={faEnvelope}
+                        type="email"
+                        control={control}
+                        rules={{required: "Электронная почта обязательна"}}
+                        errors={errors}
+                    />
+                    <InputField
+                        name="password"
+                        placeholder="Пароль"
+                        icon={faLock}
+                        type="password"
+                        control={control}
+                        rules={{
+                            required: "Пароль обязателен",
+                            minLength: {value: 8, message: "Пароль должен быть не менее 8 символов"}
+                        }}
+                        errors={errors}
+                    />
                     <button type="submit">Войти</button>
                 </form>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
