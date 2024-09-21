@@ -2,13 +2,14 @@ import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import './RegistrationForm.css';
 import {faEnvelope, faLock, faPhone, faUser} from '@fortawesome/free-solid-svg-icons';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import InputField from "./input/InputField";
 
 const RegistrationForm = () => {
     const {control, handleSubmit, formState: {errors}, getValues} = useForm();
     const [submitError, setSubmitError] = React.useState('');
     const [submitSuccess, setSubmitSuccess] = React.useState('');
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
@@ -29,6 +30,7 @@ const RegistrationForm = () => {
             const result = await response.json();
             console.log('Form submitted successfully:', result);
             setSubmitSuccess('Регистрация прошла успешно!');
+            navigate('/dashboard');
         } catch (error) {
             console.error('Error submitting form:', error);
             setSubmitError('Произошла ошибка: ' + error.message);
