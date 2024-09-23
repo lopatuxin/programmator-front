@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
+import MainPage from './components/MainPage';
 import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -32,8 +32,8 @@ function App() {
                 <Routes>
                     <Route path="/register" element={<RegistrationForm />} />
                     <Route path="/login" element={<LoginForm />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="*" element={<Dashboard />} />
+                    <Route path="/mainpage" element={<MainPage />} />
+                    <Route path="*" element={<MainPage />} />
                 </Routes>
             </Router>
         </ThemeProvider>

@@ -30,7 +30,7 @@ const RegistrationForm = () => {
             const result = await response.json();
             console.log('Form submitted successfully:', result);
             setSubmitSuccess('Регистрация прошла успешно!');
-            navigate('/dashboard');
+            navigate('/mainpage');
         } catch (error) {
             console.error('Error submitting form:', error);
             setSubmitError('Произошла ошибка: ' + error.message);
@@ -80,7 +80,7 @@ const RegistrationForm = () => {
                         control={control}
                         rules={{
                             required: "Номер телефона обязателен",
-                            pattern: {value: /^[0-9]{10}$/, message: "Неверный формат номера телефона"}
+                            pattern: {value: /^[0-9]{11}$/, message: "Неверный формат номера телефона"}
                         }}
                         errors={errors}
                     />

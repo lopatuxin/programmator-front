@@ -31,7 +31,7 @@ const LoginForm = () => {
             const responseData = await response.json();
             console.log('Success:', responseData);
             alert(responseData); // Вывод сообщения на экран
-            navigate('/dashboard');
+            navigate('/mainpage');
         } catch (error) {
             console.error('Error:', error);
             setErrorMessage('Login failed: ' + error.message); // Установка сообщения об ошибке
