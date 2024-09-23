@@ -1,5 +1,6 @@
 import React from 'react';
 import './MainPage.css';
+import Sidebar from "./sidebar/Sidebar";
 
 const CustomDashboard = () => {
     const progress = 50; // Пример прогресса по курсу
@@ -8,13 +9,14 @@ const CustomDashboard = () => {
 
     return (
         <div className="home-page">
+            <Sidebar/>
             <h1>Добро пожаловать, [Имя пользователя]!</h1>
             <div className="courses-section">
                 <h2>Ваши курсы</h2>
                 <div className="course-card">
                     <h3>Название курса</h3>
                     <div className="progress-bar">
-                        <div className="progress" style={{ width: `${progress}%` }}></div>
+                        <div className="progress" style={{width: `${progress}%`}}></div>
                     </div>
                     <p>{completedLessons}/{totalLessons} уроков завершено</p>
                     <button>Продолжить курс</button>
