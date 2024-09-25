@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from './components/MainPage';
 import RegistrationForm from './components/RegistrationForm';
-import LoginForm from './components/LoginForm';
+import LoginForm from './components/auth/LoginForm';
 import {ThemeProvider} from "@mui/material";
 import theme from './Theme';
 
