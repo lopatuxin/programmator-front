@@ -1,13 +1,13 @@
 import React from 'react';
-import {useForm, Controller} from 'react-hook-form';
-import {TextField, Button, Container, Typography, Box} from '@mui/material';
-import {useNavigate, Link} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
+import {Avatar, Box, Button, Checkbox, Container, TextField, Typography} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const LoginForm = () => {
     const {control, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = React.useState('');
-
 
     const onSubmit = async (data) => {
         try {
@@ -33,82 +33,61 @@ const LoginForm = () => {
     };
 
     return (
-        <Container maxWidth="sm">
-            <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 8}}>
-                <Typography component="h1" variant="h5">
-                    Вход в систему
+        <Container maxWidth="xs">
+            <Box
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    backgroundColor: '#33448A',
+                    padding: 4,
+                    borderRadius: 2,
+                }}
+            >
+                <Avatar sx={{m: 1, bgcolor: 'primary'}}>
+                    <LockOutlinedIcon/>
+                </Avatar>
+                <Typography component="h1" variant="h5" color="white">
+                    Вход
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
-                    <Controller
-                        name="email"
-                        control={control}
-                        defaultValue=""
-                        rules={{required: "Электронная почта обязательна"}}
-                        render={({field}) => (
-                            <TextField
-                                {...field}
-                                label="Ваша почта"
-                                variant="outlined"
-                                margin="normal"
-                                fullWidth
-                                error={!!errors.email}
-                                helperText={errors.email ? errors.email.message : ''}
-                            />
-                        )}
+                <Box component="form" noValidate sx={{mt: 1}}>
+                    <TextField
+                        margin="normal"
+                        fullWidth
+                        id="username"
+                        label="Логин"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        sx={{backgroundColor: 'white'}}
                     />
-                    <Controller
+                    <TextField
+                        margin="normal"
+                        fullWidth
                         name="password"
-                        control={control}
-                        defaultValue=""
-                        rules={{
-                            required: "Пароль обязателен",
-                            minLength: {value: 8, message: "Пароль должен быть не менее 8 символов"},
-                        }}
-                        render={({field}) => (
-                            <TextField
-                                {...field}
-                                label="Пароль"
-                                type="password"
-                                variant="outlined"
-                                margin="normal"
-                                fullWidth
-                                error={!!errors.password}
-                                helperText={errors.password ? errors.password.message : ''}
-                            />
-                        )}
+                        label="Пароль"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        sx={{backgroundColor: 'white'}}
                     />
+                    <Box sx={{display: 'flex', justifyContent: 'space-between', color: 'white'}}>
+                        <Checkbox value="remember" color="primary"/>
+                        <Typography variant="body2">Запомнить меня</Typography>
+                        <Typography variant="body2" sx={{cursor: 'pointer'}}>
+                            Забыли пароль?
+                        </Typography>
+                    </Box>
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
-                        sx={{
-                            mt: 3,
-                            mb: 2,
-                            backgroundColor: '#28a745',
-                            '&:hover': {
-                                backgroundColor: '#218838',
-                            },
-                        }}
+                        sx={{mt: 3, mb: 2, bgcolor: 'primary'}}
                     >
-                        Войти
+                        Вход
                     </Button>
-                    {errorMessage && <Typography color="error">{errorMessage}</Typography>}
-                    <Link to="/forgot-password" style={{textDecoration: 'none'}}>
-                        <Typography
-                            variant="body2"
-                            sx={{
-                                color: '#ffcc00',
-                                '&:hover': {
-                                    textDecoration: 'underline',
-                                    color: '#ffcc00',
-                                },
-                            }}
-                        >
-                            Забыли пароль?
-                        </Typography>
-                    </Link>
-
                 </Box>
             </Box>
         </Container>
