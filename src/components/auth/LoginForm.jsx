@@ -36,7 +36,10 @@ const LoginForm = () => {
         <Container maxWidth="xs">
             <Box
                 sx={{
-                    marginTop: 8,
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -72,13 +75,21 @@ const LoginForm = () => {
                         autoComplete="current-password"
                         sx={{backgroundColor: 'white'}}
                     />
-                    <Box sx={{display: 'flex', justifyContent: 'space-between', color: 'white'}}>
-                        <Checkbox value="remember" color="primary"/>
-                        <Typography variant="body2">Запомнить меня</Typography>
-                        <Typography variant="body2" sx={{cursor: 'pointer'}}>
+                    <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'white'}}>
+                        <Box sx={{display: 'flex', alignItems: 'center', color: 'white'}}>
+                            <Checkbox value="remember" color="primary"/>
+                            <Typography variant="body2">Запомнить меня</Typography>
+                        </Box>
+                        <Typography variant="body2" sx={{
+                            cursor: 'pointer',
+                            '&:hover': {
+                                textDecoration: 'underline',
+                            }
+                        }}>
                             Забыли пароль?
                         </Typography>
                     </Box>
+
                     <Button
                         type="submit"
                         fullWidth
