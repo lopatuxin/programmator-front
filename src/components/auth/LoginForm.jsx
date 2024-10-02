@@ -45,7 +45,7 @@ const LoginForm = () => {
                     alignItems: 'center',
                     backgroundColor: '#33448A',
                     padding: 4,
-                    borderRadius: 2,
+                    borderRadius: 5,
                 }}
             >
                 <Avatar sx={{m: 1, bgcolor: 'primary'}}>
@@ -63,7 +63,13 @@ const LoginForm = () => {
                         name="username"
                         autoComplete="username"
                         autoFocus
-                        sx={{backgroundColor: 'white'}}
+                        sx={{
+                            backgroundColor: 'white',
+                            borderRadius: '10px',
+                            '& .MuiOutlinedInput-root': {
+                                borderRadius: '10px',
+                            },
+                        }}
                     />
                     <TextField
                         margin="normal"
@@ -73,7 +79,13 @@ const LoginForm = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
-                        sx={{backgroundColor: 'white'}}
+                        sx={{
+                            backgroundColor: 'white',
+                            borderRadius: '10px',
+                            '& .MuiOutlinedInput-root': {
+                                borderRadius: '10px',
+                            },
+                        }}
                     />
                     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'white'}}>
                         <Box sx={{display: 'flex', alignItems: 'center', color: 'white'}}>

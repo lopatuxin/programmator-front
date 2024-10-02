@@ -4,7 +4,7 @@ const theme = createTheme({
     palette: {
         mode: 'light', // или 'dark' для темной темы
         background: {
-            default: '#202C5E', // Цвет фона по умолчанию
+            default: '#1C1C3D', // Цвет фона по умолчанию
             paper: '#33448A',  // Цвет карточек и других поверхностей
         },
         primary: {
@@ -18,6 +18,15 @@ const theme = createTheme({
         fontFamily: 'Roboto, Arial, sans-serif', // Базовый шрифт
         h1: {
             fontSize: '2rem',
+        },
+    },
+    components: {
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    color: 'black',
+                },
+            },
         },
     },
 });
