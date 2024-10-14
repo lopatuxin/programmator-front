@@ -2,7 +2,7 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {Avatar, Box, Button, Checkbox, Container, TextField, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const LoginForm = () => {
     const {control, handleSubmit, formState: {errors}} = useForm();
@@ -37,21 +37,34 @@ const LoginForm = () => {
             <Box
                 sx={{
                     position: 'absolute',
-                    top: '50%',
+                    top: '210px', // Позиционирование над формой
                     left: '50%',
-                    transform: 'translate(-50%, -50%)',
+                    transform: 'translateX(-50%)', // Центрирование по горизонтали
+                    bgcolor: '#33448A', // Цвет фона для аватара
+                    borderRadius: '50%', // Круглая форма аватара
+                    width: 80, // Размер аватара
+                    height: 80,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                <Avatar sx={{bgcolor: 'primary.main', width: 80, height: 80}}>
+                    <AccountCircleIcon style={{fontSize: 60, color: '#ffffff'}}/>
+                </Avatar>
+            </Box>
+            <Box
+                sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     backgroundColor: '#33448A',
                     padding: 4,
                     borderRadius: 5,
+                    marginTop: '250px', // Отступ чтобы форма не пересекалась с аватаром
                 }}
             >
-                <Avatar sx={{m: 1, bgcolor: 'primary'}}>
-                    <LockOutlinedIcon/>
-                </Avatar>
-                <Typography component="h1" variant="h5" color="white">
+                <Typography component="h1" variant="h5" color="white" sx={{ marginTop: '20px' }}>
                     Вход
                 </Typography>
                 <Box component="form" noValidate sx={{mt: 1}}>
