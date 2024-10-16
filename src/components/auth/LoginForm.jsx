@@ -10,6 +10,7 @@ const LoginForm = () => {
     const [errorMessage, setErrorMessage] = React.useState('');
 
     const onSubmit = async (data) => {
+
         try {
             const response = await fetch('http://localhost:8080/auth/login', {
                 method: 'POST',
@@ -67,7 +68,7 @@ const LoginForm = () => {
                 <Typography component="h1" variant="h5" color="white" sx={{ marginTop: '20px' }}>
                     Вход
                 </Typography>
-                <Box component="form" noValidate sx={{mt: 1}}>
+                <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{mt: 1}}>
                     <TextField
                         margin="normal"
                         fullWidth
@@ -100,6 +101,11 @@ const LoginForm = () => {
                             },
                         }}
                     />
+                    {errorMessage && (
+                        <Typography color="error" sx={{ mt: 2 }}>
+                            {errorMessage} {/* Вывод сообщения об ошибке */}
+                        </Typography>
+                    )}
                     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'white'}}>
                         <Box sx={{display: 'flex', alignItems: 'center', color: 'white'}}>
                             <Checkbox value="remember" color="primary"/>
