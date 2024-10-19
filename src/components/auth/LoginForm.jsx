@@ -5,7 +5,13 @@ import {useNavigate} from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const LoginForm = () => {
-    const {control, handleSubmit, formState: {errors}} = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: {errors}
+    } = useForm({
+        mode: 'onSubmit'
+    });
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = React.useState('');
 
@@ -29,7 +35,7 @@ const LoginForm = () => {
             const responseData = await response.json();
             navigate('/mainpage');
         } catch (error) {
-            setErrorMessage('Login failed: ' + error.message);
+            setErrorMessage('Ошибка входа: ' + error.message);
         }
     };
 
@@ -65,11 +71,12 @@ const LoginForm = () => {
                     marginTop: '250px', // Отступ чтобы форма не пересекалась с аватаром
                 }}
             >
-                <Typography component="h1" variant="h5" color="white" sx={{ marginTop: '20px' }}>
+                <Typography component="h1" variant="h5" color="white" sx={{marginTop: '20px'}}>
                     Вход
                 </Typography>
                 <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{mt: 1}}>
                     <TextField
+                        {...register('username', {required: 'Логин обязателен'})}
                         margin="normal"
                         fullWidth
                         id="username"
@@ -85,7 +92,13 @@ const LoginForm = () => {
                             },
                         }}
                     />
+                    {errors.password && (
+                        <Typography color="error" sx={{mt: 1, color: 'red'}}>
+                            {errors.username.message}
+                        </Typography>
+                    )}
                     <TextField
+                        {...register('password', {required: 'Пароль обязателен'})}
                         margin="normal"
                         fullWidth
                         name="password"
@@ -101,8 +114,14 @@ const LoginForm = () => {
                             },
                         }}
                     />
+                    {errors.password && (
+                        <Typography color="error" sx={{mt: 1, color: 'red'}}>
+                            {errors.password.message}
+                        </Typography>
+                    )}
+
                     {errorMessage && (
-                        <Typography color="error" sx={{ mt: 2 }}>
+                        <Typography color="error" sx={{mt: 2}}>
                             {errorMessage} {/* Вывод сообщения об ошибке */}
                         </Typography>
                     )}
