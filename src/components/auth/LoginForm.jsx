@@ -33,6 +33,13 @@ const LoginForm = () => {
             }
 
             const responseData = await response.json();
+            const token = responseData.data?.token; // Извлекаем токен из data
+            if (token) {
+                localStorage.setItem('token', token);
+                console.log('Токен успешно сохранен:', token);
+            } else {
+                console.log('Токен не был получен');
+            }
             navigate('/mainpage');
         } catch (error) {
             setErrorMessage('Ошибка входа: ' + error.message);
@@ -76,13 +83,13 @@ const LoginForm = () => {
                 </Typography>
                 <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{mt: 1}}>
                     <TextField
-                        {...register('username', {required: 'Логин обязателен'})}
+                        {...register('email', {required: 'Логин обязателен'})}
                         margin="normal"
                         fullWidth
-                        id="username"
+                        id="email"
                         label="Логин"
-                        name="username"
-                        autoComplete="username"
+                        name="email"
+                        autoComplete="email"
                         autoFocus
                         sx={{
                             backgroundColor: 'white',
@@ -94,7 +101,7 @@ const LoginForm = () => {
                     />
                     {errors.password && (
                         <Typography color="error" sx={{mt: 1, color: 'red'}}>
-                            {errors.username.message}
+                            {errors.email.message}
                         </Typography>
                     )}
                     <TextField
